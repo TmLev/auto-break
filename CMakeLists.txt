@@ -33,6 +33,7 @@ message(STATUS "[auto_break] Found Clang in ${CLANG_DIR}")
 
 add_executable(auto_break
   src/main.cpp
+  src/details/impl.cpp
 )
 target_include_directories(auto_break
   PRIVATE src
