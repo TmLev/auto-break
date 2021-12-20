@@ -1,5 +1,8 @@
 #include <details/impl.hpp>
 
+#include <clang/AST/ASTContext.h>
+#include <clang/ASTMatchers/ASTMatchFinder.h>
+
 #include <clang/Frontend/FrontendActions.h>
 #include <clang/Tooling/Tooling.h>
 
@@ -9,9 +12,36 @@
 
 namespace auto_break {
 
+constexpr auto kSwitchCase = "switch_case";
+
+class MatchCallback : public clang::ast_matchers::MatchFinder::MatchCallback {
+ public:
+  using MatchResult = clang::ast_matchers::MatchFinder::MatchResult;
+
+  auto run(const MatchResult& result) -> void override {
+    const auto switch_case = result.Nodes.getNodeAs<clang::SwitchCase>(kSwitchCase);
+  }
+
+ private:
+};
+
 class Consumer : public clang::ASTConsumer {
  public:
-  Consumer() = default;
+  using MatchFinder = clang::ast_matchers::MatchFinder;
+
+  Consumer() {
+    using namespace clang::ast_matchers;  // NOLINT
+    const auto matcher = switchCase(isExpansionInMainFile()).bind(kSwitchCase);
+    match_finder_.addMatcher(matcher, &match_callback_);
+  }
+
+  auto HandleTranslationUnit(clang::ASTContext& context) -> void override {
+    match_finder_.matchAST(context);
+  }
+
+ private:
+  MatchCallback match_callback_;
+  MatchFinder match_finder_;
 };
 
 class Action : public clang::ASTFrontendAction {
