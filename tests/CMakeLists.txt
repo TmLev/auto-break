@@ -1,1 +1,2 @@
 add_auto_break_test(test_empty_switch test_empty_switch.cpp)
+add_auto_break_test(test_empty_cases test_empty_cases.cpp)

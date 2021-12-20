@@ -1,6 +1,4 @@
-#include <iostream>
-
 auto main() -> int {
-    std::cout << "Switch test is empty!" << std::endl;
-    std::abort();
+  const auto x = int{1};
+  switch (x) {}
 }
