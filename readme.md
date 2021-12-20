@@ -1,6 +1,7 @@
-# AutoBreak Clang tool
+# AutoBreak
 
-Automatically insert missing `break` statements to `switch`'s `case`-s.
+AutoBreak is a ClangTool that automatically inserts
+missing `break` statements to `case`-s of the `switch` statement.
 
 ## Build for use
 
