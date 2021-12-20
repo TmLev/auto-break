@@ -12,14 +12,14 @@
 
 namespace auto_break {
 
-constexpr auto kSwitchCase = "switch_case";
+constexpr auto kSwitchStmtID = "switch_stmt_id";
 
 class MatchCallback : public clang::ast_matchers::MatchFinder::MatchCallback {
  public:
   using MatchResult = clang::ast_matchers::MatchFinder::MatchResult;
 
   auto run(const MatchResult& result) -> void override {
-    const auto switch_case = result.Nodes.getNodeAs<clang::SwitchCase>(kSwitchCase);
+    const auto switch_stmt = result.Nodes.getNodeAs<clang::SwitchStmt>(kSwitchStmtID);
   }
 
  private:
@@ -31,7 +31,7 @@ class Consumer : public clang::ASTConsumer {
 
   Consumer() {
     using namespace clang::ast_matchers;  // NOLINT
-    const auto matcher = switchCase(isExpansionInMainFile()).bind(kSwitchCase);
+    const auto matcher = switchStmt().bind(kSwitchStmtID);
     match_finder_.addMatcher(matcher, &match_callback_);
   }
 
