@@ -1,4 +1,4 @@
-# AutoBreak tool
+# AutoBreak Clang tool
 
 Automatically insert missing `break` statements to `switch`'s `case`-s.
 
