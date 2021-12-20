@@ -1,0 +1,17 @@
+---
+
+Language: Cpp
+BasedOnStyle: Google
+
+ColumnLimit: 100
+
+AlignEscapedNewlines: Left
+AlignTrailingComments: true
+
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+SortIncludes: Never
