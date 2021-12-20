@@ -1,0 +1,1 @@
+add_auto_break_test(test_empty_switch test_empty_switch.cpp)
