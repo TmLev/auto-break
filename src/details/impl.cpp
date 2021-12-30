@@ -1,12 +1,14 @@
 #include <details/impl.hpp>
 
 #include <clang/AST/ASTContext.h>
+#include <clang/AST/Stmt.h>
 #include <clang/ASTMatchers/ASTMatchFinder.h>
 
 #include <clang/Frontend/FrontendActions.h>
 #include <clang/Tooling/Tooling.h>
 
 #include <llvm/ADT/StringRef.h>
+#include <llvm/Support/Casting.h>
 
 #include <memory>
 
@@ -26,9 +28,21 @@ class MatchCallback : public clang::ast_matchers::MatchFinder::MatchCallback {
 
   auto run(const MatchResult& result) -> void override {
     const auto switch_stmt = result.Nodes.getNodeAs<clang::SwitchStmt>(kSwitchStmtID);
+
+    for (const clang::SwitchCase* switch_case = switch_stmt->getSwitchCaseList();
+         switch_case != nullptr; switch_case = switch_case->getNextSwitchCase()) {
+      if (ShouldSkipSwitchCase(switch_case)) {
+        continue;
+      }
+    }
   }
 
  private:
+  auto ShouldSkipSwitchCase(const clang::SwitchCase* switch_case) const -> bool {
+    const auto* as_default = llvm::dyn_cast<clang::DefaultStmt>(switch_case);
+    const auto* as_case = llvm::dyn_cast<clang::CaseStmt>(switch_case);
+    return true;
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
