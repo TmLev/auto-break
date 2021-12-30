@@ -2,12 +2,12 @@
 
 cmake_minimum_required(VERSION 3.18)
 
-project(auto_break)
+project(auto-break)
 
 # ------------------------------------------------------------------------------
 # Public options.
 
-option(AUTO_BREAK_ENABLE_TESTS "Build tests for `auto_break` tool" OFF)
+option(AUTO_BREAK_ENABLE_TESTS "Build tests for `auto-break` tool" OFF)
 
 # ------------------------------------------------------------------------------
 # CMake setup.
@@ -22,32 +22,32 @@ include(cmake/AutoBreakTests.cmake)
 
 find_package(LLVM CONFIG REQUIRED)
 llvm_map_components_to_libnames(LLVM_LIBRARIES Support)
-message(STATUS "[auto_break] Found LLVM in ${LLVM_DIR}")
-message(STATUS "[auto_break] LLVM libraries: ${LLVM_LIBRARIES}")
+message(STATUS "[auto-break] Found LLVM in ${LLVM_DIR}")
+message(STATUS "[auto-break] LLVM libraries: ${LLVM_LIBRARIES}")
 
 find_package(CLANG CONFIG REQUIRED)
-message(STATUS "[auto_break] Found Clang in ${CLANG_DIR}")
+message(STATUS "[auto-break] Found Clang in ${CLANG_DIR}")
 
 # ------------------------------------------------------------------------------
 # `auto_break` tool.
 
-add_executable(auto_break
+add_executable(auto-break
   src/main.cpp
   src/details/impl.cpp
 )
-target_include_directories(auto_break
+target_include_directories(auto-break
   PRIVATE src
 )
 
 # Add LLVM & Clang.
 
-target_include_directories(auto_break
+target_include_directories(auto-break
   SYSTEM
   PRIVATE
     ${LLVM_INCLUDE_DIRS}
     ${CLANG_INCLUDE_DIRS}
 )
-target_link_libraries(auto_break
+target_link_libraries(auto-break
   PRIVATE
     ${LLVM_LIBRARIES}
     clangAST

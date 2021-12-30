@@ -7,7 +7,7 @@
 
 namespace {
 
-static auto auto_break_category = llvm::cl::OptionCategory{"auto_break options"};
+static auto auto_break_category = llvm::cl::OptionCategory{"auto-break options"};
 
 }
 

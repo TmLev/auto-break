@@ -12,7 +12,7 @@ cmake \
   -D LLVM_DIR=<path/to/llvm> \
   -D CLANG_DIR=<path/to/clang>
 
-cmake --build build/release --target auto_break
+cmake --build build/release --target auto-break
 ```
 
 ## Test
