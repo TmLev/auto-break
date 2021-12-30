@@ -1,4 +1,5 @@
+auto GetInt() -> int;
+
 auto main() -> int {
-  const auto x = int{1};
-  switch (x) {}
+  switch (GetInt()) {}
 }
