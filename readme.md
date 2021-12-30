@@ -13,7 +13,7 @@ When case has:
 
 ## Known limitations
 
-Currently, AutoBreak doesn't know how to handle:
+Currently, AutoBreak is unaware of:
 
 * `[[noreturn]]` function calls.
 
