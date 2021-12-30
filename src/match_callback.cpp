@@ -81,12 +81,19 @@ auto MatchCallback::run(const clang::ast_matchers::MatchFinder::MatchResult& mat
       continue;
     }
 
-    [[maybe_unused]] const auto missing_break = std::get<MissingBreak>(inspection_result);
+    const auto missing_break = std::get<MissingBreak>(inspection_result);
 
     clang::DiagnosticsEngine& diagnostics = match_result.Context->getDiagnostics();
+
     const unsigned id = diagnostics.getCustomDiagID(clang::DiagnosticsEngine::Warning,
                                                     "Case is missing `break` statement");
-    clang::DiagnosticBuilder builder = diagnostics.Report(switch_case->getKeywordLoc(), id);
+
+    const clang::FixItHint fix_it_hint = clang::FixItHint::CreateInsertion(
+        missing_break.stmt_before_next_case->getEndLoc(), "break;");
+
+    diagnostics  //
+        .Report(switch_case->getKeywordLoc(), id)
+        .AddFixItHint(fix_it_hint);
   }
 }
 
