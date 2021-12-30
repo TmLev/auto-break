@@ -32,8 +32,9 @@ message(STATUS "[auto-break] Found Clang in ${CLANG_DIR}")
 # `auto_break` tool.
 
 add_executable(auto-break
+  src/boilerplate.cpp
   src/main.cpp
-  src/details/impl.cpp
+  src/match_callback.cpp
 )
 target_include_directories(auto-break
   PRIVATE src

@@ -1,5 +1,5 @@
-#ifndef AUTO_BREAK_IMPL_HPP
-#define AUTO_BREAK_IMPL_HPP
+#ifndef AUTO_BREAK_BOILERPLATE_HPP
+#define AUTO_BREAK_BOILERPLATE_HPP
 
 #include <clang/Tooling/Tooling.h>
 
@@ -11,4 +11,4 @@ auto MakeFactory() -> std::unique_ptr<clang::tooling::FrontendActionFactory>;
 
 }
 
-#endif  // AUTO_BREAK_IMPL_HPP
+#endif  // AUTO_BREAK_BOILERPLATE_HPP
