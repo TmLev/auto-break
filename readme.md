@@ -31,6 +31,10 @@ cmake --build build/release --target auto-break
 
 ## Test
 
+Tests are unavailable yet.
+
+<details>
+
 ```shell
 cmake \
   -B build/test \
@@ -41,3 +45,5 @@ cmake \
 
 cmake --build build/test --target test_empty_switch
 ```
+
+</details>
