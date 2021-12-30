@@ -10,7 +10,12 @@ When case has:
 * No `break` statement (obviously).
 * No `return` statement.
 * No `[[fallthrough]]` attribute.
-* No `[[noreturn]]` function calls.
+
+## Known limitations
+
+Currently, AutoBreak doesn't know how to handle:
+
+* `[[noreturn]]` function calls.
 
 ## Build for use
 
